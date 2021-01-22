@@ -6,10 +6,12 @@ import org.junit.After
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.FixMethodOrder
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runners.MethodSorters
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@Ignore
 class CloudFavouritesTest {
     lateinit var cloudFavourites: CloudFavourites
     lateinit var gson: Gson
