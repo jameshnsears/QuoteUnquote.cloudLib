@@ -3,10 +3,7 @@ plugins {
     id 'kotlin-android'
 }
 
-apply from: '../../jacoco.gradle'
-apply from: '../../ktlint.gradle'
-apply from: '../../detekt.gradle'
-apply from: '../../checkstyle.gradle'
+apply from: '../jacoco.gradle'
 
 android {
     compileSdkVersion 29
