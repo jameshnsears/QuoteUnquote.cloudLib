@@ -4,6 +4,7 @@ plugins {
 }
 
 apply from: '../jacoco.gradle'
+//apply from: '../sonarcube.gradle'
 
 android {
     compileSdkVersion 29
