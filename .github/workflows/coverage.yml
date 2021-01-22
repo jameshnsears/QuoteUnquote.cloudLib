@@ -9,7 +9,6 @@ on:
 jobs:
   coverage-cloudLib:
     name: coverage-cloudLib
-    needs: coverage-app
     runs-on: macos-latest
     steps:
       - name: checkout
