@@ -16,18 +16,18 @@ import java.io.IOException
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class CloudFavouritesTest {
-    lateinit var cloudFavourites: CloudFavourites
-    lateinit var gson: Gson
+    private lateinit var cloudFavourites: CloudFavourites
+    private lateinit var gson: Gson
 
     @Before
     fun setUp() {
-        cloudFavourites = spyk<CloudFavourites>()
+        cloudFavourites = spyk()
         gson = Gson()
     }
 
     @After
     fun shutdown() {
-        cloudFavourites.shutdown()
+        CloudFavourites.shutdown()
     }
 
     @Test

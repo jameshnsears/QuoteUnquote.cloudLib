@@ -25,6 +25,5 @@ public class ReceiveResponseFuture extends CompletableFuture<Response> implement
     @Override
     public void onFailure(@NonNull final Call call, @NonNull final IOException e) {
         super.completeExceptionally(e);
-        Timber.e(e);
     }
 }

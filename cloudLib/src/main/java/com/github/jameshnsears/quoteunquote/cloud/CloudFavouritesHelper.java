@@ -4,15 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import timber.log.Timber;
+
 
 public class CloudFavouritesHelper {
     @Nullable
     private static String localCode;
+
+    private CloudFavouritesHelper() {
+        throw new IllegalStateException("Utility class");
+    }
 
     @NonNull
     public static synchronized String getLocalCode() {
@@ -32,14 +39,25 @@ public class CloudFavouritesHelper {
 
     @NonNull
     public static String jsonReceiveRequest(@NonNull final String remoteCode) {
-        final ReceiveRequest receiveRequest = new ReceiveRequest();
+        ReceiveRequest receiveRequest = new ReceiveRequest();
         receiveRequest.code = remoteCode;
-        return new Gson().toJson(receiveRequest);
+
+        String json = getGson().toJson(receiveRequest);
+        Timber.d("json=%s", json);
+        return json;
     }
 
     @NonNull
     public static String jsonSendRequest(@NonNull final SaveRequest saveRequest) {
-        Gson gson = new Gson();
-        return gson.toJson(saveRequest);
+        String json = getGson().toJson(saveRequest);
+        Timber.d("json=%s", json);
+        return json;
+    }
+
+    @NonNull
+    private static Gson getGson() {
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting();
+        return builder.create();
     }
 }

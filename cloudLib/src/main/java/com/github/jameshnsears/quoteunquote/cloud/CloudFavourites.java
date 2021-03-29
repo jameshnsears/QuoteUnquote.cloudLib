@@ -27,17 +27,37 @@ import timber.log.Timber;
 public final class CloudFavourites {
     public static final int TIMEOUT_SECONDS = 10;
     private static final String DNS = "8.8.8.8";
-    private final ExecutorService executorService = Executors.newFixedThreadPool(5);
+    @Nullable
+    private static ExecutorService executorService;
 
-    public void shutdown() {
-        executorService.shutdown();
+    @NonNull
+    public static ExecutorService getExecutorService() {
+        if (executorService == null) {
+            executorService = Executors.newSingleThreadExecutor();
+        }
+        Timber.d(executorService.toString());
+        return executorService;
+    }
+
+    public static void shutdown() {
+        if (executorService != null) {
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                executorService.shutdown();
+                try {
+                    if (!executorService.awaitTermination(5000, TimeUnit.MICROSECONDS)) {
+                        Timber.d("awaitTermination=timeout");
+                    }
+                } catch (@NonNull InterruptedException e) {
+                    Timber.e(e);
+                }
+                Timber.d(executorService.toString());
+            }));
+        }
     }
 
     public boolean save(@NonNull final String payload) {
         final String endpointSave = BuildConfig.REMOTE_DEVICE_ENDPOINT + "/save";
-        Timber.d("endpointSave=%s; payload=%s", endpointSave, payload);
-
-        final Future<Boolean> future = executorService.submit(() -> {
+        final Future<Boolean> future = getExecutorService().submit(() -> {
 
             Request request = new Request.Builder()
                     .url(endpointSave)
@@ -55,11 +75,9 @@ public final class CloudFavourites {
             try {
                 try (Response response = client.newCall(request).execute()) {
                     if (!response.isSuccessful()) {
-                        Timber.d(request.toString());
                         return false;
                     }
 
-                    Timber.d("%s", response.body().string());
                     return true;
                 }
             } catch (SocketTimeoutException e) {
@@ -70,7 +88,6 @@ public final class CloudFavourites {
         try {
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            Timber.w(e.toString());
             Thread.currentThread().interrupt();
             return false;
         }
@@ -79,7 +96,6 @@ public final class CloudFavourites {
     @Nullable
     public ReceiveResponse receive(final int timeout, @NonNull final String payload) {
         final String endpointLoad = BuildConfig.REMOTE_DEVICE_ENDPOINT + "/receive";
-        Timber.d("endpointLoad=%s; payload=%s", endpointLoad, payload);
 
         final Request request = new Request.Builder()
                 .url(endpointLoad)
@@ -102,7 +118,7 @@ public final class CloudFavourites {
 
             response = future.get();
             final String responseBody = response.body().string();
-            Timber.d("%s", responseBody);
+            Timber.d("%d", response.code());
 
             final Gson gson = new Gson();
             receiveResponse = gson.fromJson(responseBody, ReceiveResponse.class);
@@ -124,13 +140,12 @@ public final class CloudFavourites {
     }
 
     public boolean isInternetAvailable() {
-        final Future<Boolean> future = executorService.submit(() -> {
-            try {
-                Socket socket = getSocket();
+        final Future<Boolean> future = getExecutorService().submit(() -> {
+
+            try (Socket socket = getSocket()) {
                 socket.connect(new InetSocketAddress(DNS, 53), 1500);
-                socket.close();
                 return true;
-            } catch (IOException e) {
+            } catch (Exception e) {
                 Timber.e(e);
                 return false;
             }
@@ -138,10 +153,9 @@ public final class CloudFavourites {
 
         try {
             boolean available = future.get();
-            Timber.d("%b", available);
+            Timber.d("isInternetAvailable=%b", available);
             return available;
         } catch (ExecutionException | InterruptedException e) {
-            Timber.e(e);
             Thread.currentThread().interrupt();
             return false;
         }
