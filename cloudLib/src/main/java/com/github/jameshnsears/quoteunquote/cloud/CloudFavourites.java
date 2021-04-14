@@ -87,7 +87,7 @@ public final class CloudFavourites {
 
         try {
             return future.get();
-        } catch (ExecutionException | InterruptedException e) {
+        } catch (@NonNull ExecutionException | InterruptedException e) {
             Thread.currentThread().interrupt();
             return false;
         }
@@ -122,7 +122,7 @@ public final class CloudFavourites {
 
             final Gson gson = new Gson();
             receiveResponse = gson.fromJson(responseBody, ReceiveResponse.class);
-        } catch (ExecutionException | InterruptedException | IOException e) {
+        } catch (@NonNull ExecutionException | InterruptedException | IOException e) {
             Timber.w(e.toString());
             Thread.currentThread().interrupt();
         } finally {
@@ -155,7 +155,7 @@ public final class CloudFavourites {
             boolean available = future.get();
             Timber.d("isInternetAvailable=%b", available);
             return available;
-        } catch (ExecutionException | InterruptedException e) {
+        } catch (@NonNull ExecutionException | InterruptedException e) {
             Thread.currentThread().interrupt();
             return false;
         }
