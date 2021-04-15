@@ -74,11 +74,7 @@ public final class CloudFavourites {
 
             try {
                 try (Response response = client.newCall(request).execute()) {
-                    if (!response.isSuccessful()) {
-                        return false;
-                    }
-
-                    return true;
+                    return response.isSuccessful();
                 }
             } catch (SocketTimeoutException e) {
                 return false;
