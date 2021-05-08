@@ -1,6 +1,10 @@
 package com.github.jameshnsears.quoteunquote.cloud
 
 class RequestTestHelper {
+    private constructor() {
+        // ...
+    }
+
     companion object {
         const val code = "4EXRqu8N68"
 
