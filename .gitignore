@@ -20,3 +20,4 @@
 *.iml
 local.properties
 /cloudLib/.idea/
+cloudLib/.classpath
