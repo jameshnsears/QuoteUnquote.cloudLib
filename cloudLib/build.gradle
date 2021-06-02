@@ -74,19 +74,25 @@ android {
 
     flavorDimensions 'Version'
     productFlavors {
-        'googleplay' {
-            dimension 'Version'
-            compileSdkVersion 30
-            minSdkVersion 24
-            targetSdkVersion 30
-        }
         'fdroid' {
             dimension 'Version'
             compileSdkVersion 30
             minSdkVersion 24
             targetSdkVersion 30
         }
-        's' {
+        'fdroidS' {
+            dimension 'Version'
+            compileSdkVersion "android-S"
+            minSdkVersion "S"
+            targetSdkVersion "S"
+        }
+        'googleplay' {
+            dimension 'Version'
+            compileSdkVersion 30
+            minSdkVersion 24
+            targetSdkVersion 30
+        }
+        'googleplayS' {
             dimension 'Version'
             compileSdkVersion "android-S"
             minSdkVersion "S"
@@ -95,13 +101,16 @@ android {
     }
 
     sourceSets {
-        googleplay {
-            java.srcDirs = ['src/main/java']
-        }
         fdroid {
             java.srcDirs = ['src/main/java']
         }
-        s {
+        fdroidS {
+            java.srcDirs = ['src/main/java']
+        }
+        googleplay {
+            java.srcDirs = ['src/main/java']
+        }
+        googleplayS {
             java.srcDirs = ['src/main/java']
         }
     }
