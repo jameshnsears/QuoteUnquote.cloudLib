@@ -23,7 +23,7 @@ if (!localPropertiesFile.exists()) {
 
 android {
     compileSdkVersion 30
-    // compileSdkVersion "android-S"S"
+    // compileSdkVersion "android-S"
 
     defaultConfig {
         minSdkVersion 24
