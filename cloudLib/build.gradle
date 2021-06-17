@@ -94,6 +94,9 @@ android {
         'googleplayS' {
             dimension 'Version'
         }
+        'emanuelkebede' {
+            dimension 'Version'
+        }
     }
 
     sourceSets {
@@ -107,6 +110,9 @@ android {
             java.srcDirs = ['src/main/java']
         }
         googleplayS {
+            java.srcDirs = ['src/main/java']
+        }
+        emanuelkebede {
             java.srcDirs = ['src/main/java']
         }
     }
