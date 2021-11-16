@@ -25,8 +25,8 @@ android {
     compileSdkVersion 31
 
     defaultConfig {
-        minSdkVersion 26
-        targetSdkVersion 30
+        minSdkVersion 31
+        targetSdkVersion 31
 
         versionCode 1
         versionName "1.0"
@@ -82,13 +82,7 @@ android {
         'fdroid' {
             dimension 'Version'
         }
-        'fdroidS' {
-            dimension 'Version'
-        }
         'googleplay' {
-            dimension 'Version'
-        }
-        'googleplayS' {
             dimension 'Version'
         }
         'emanuelkebede' {
@@ -100,13 +94,7 @@ android {
         fdroid {
             java.srcDirs = ['src/main/java']
         }
-        fdroidS {
-            java.srcDirs = ['src/main/java']
-        }
         googleplay {
-            java.srcDirs = ['src/main/java']
-        }
-        googleplayS {
             java.srcDirs = ['src/main/java']
         }
         emanuelkebede {
@@ -125,8 +113,6 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.3.0'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
-    fdroidSImplementation 'androidx.core:core-ktx:1.7.0'
-    googleplaySImplementation 'androidx.core:core-ktx:1.7.0'
     implementation 'com.google.code.gson:gson:2.8.9'
     implementation 'com.jakewharton.timber:timber:5.0.1'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
