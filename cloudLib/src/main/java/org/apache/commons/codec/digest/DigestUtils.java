@@ -134,10 +134,10 @@ public class DigestUtils {
      *             On error reading from the stream
      * @since 1.14
      */
-    public static byte[] digest(final MessageDigest messageDigest, final Path data, final OpenOption... options)
-        throws IOException {
-        return updateDigest(messageDigest, data, options).digest();
-    }
+//    public static byte[] digest(final MessageDigest messageDigest, final Path data, final OpenOption... options)
+//        throws IOException {
+//        return updateDigest(messageDigest, data, options).digest();
+//    }
 
     /**
      * Reads through a RandomAccessFile using non-blocking-io (NIO) and returns the digest for the data
@@ -1478,12 +1478,12 @@ public class DigestUtils {
      *             On error reading from the stream
      * @since 1.14
      */
-    public static MessageDigest updateDigest(final MessageDigest digest, final Path path, final OpenOption... options)
-        throws IOException {
-        try (final BufferedInputStream inputStream = new BufferedInputStream(Files.newInputStream(path, options))) {
-            return updateDigest(digest, inputStream);
-        }
-    }
+//    public static MessageDigest updateDigest(final MessageDigest digest, final Path path, final OpenOption... options)
+//        throws IOException {
+//        try (final BufferedInputStream inputStream = new BufferedInputStream(Files.newInputStream(path, options))) {
+//            return updateDigest(digest, inputStream);
+//        }
+//    }
 
     /**
      * Reads through a RandomAccessFile and updates the digest for the data using non-blocking-io (NIO)
@@ -1626,9 +1626,9 @@ public class DigestUtils {
      *             On error reading from the stream
      * @since 1.14
      */
-    public byte[] digest(final Path data, final OpenOption... options) throws IOException {
-        return updateDigest(messageDigest, data, options).digest();
-    }
+//    public byte[] digest(final Path data, final OpenOption... options) throws IOException {
+//        return updateDigest(messageDigest, data, options).digest();
+//    }
 
     /**
      * Reads through a byte array and returns the digest for the data.
@@ -1707,9 +1707,9 @@ public class DigestUtils {
      *             On error reading from the stream
      * @since 1.11
      */
-    public String digestAsHex(final Path data, final OpenOption... options) throws IOException {
-        return Hex.encodeHexString(digest(data, options));
-    }
+//    public String digestAsHex(final Path data, final OpenOption... options) throws IOException {
+//        return Hex.encodeHexString(digest(data, options));
+//    }
 
     /**
      * Reads through a byte array and returns the digest for the data.
