@@ -56,7 +56,14 @@ public final class CloudFavourites {
     }
 
     public boolean save(@NonNull final String payload) {
-        final String endpointSave = BuildConfig.REMOTE_DEVICE_ENDPOINT + "/save";
+        String endpoint = BuildConfig.REMOTE_DEVICE_ENDPOINT + "/save";
+
+        // F-Droid can't pick up local.properties or CI env vars, so have to hard code :-(
+        if (!BuildConfig.DEBUG && BuildConfig.FLAVOR.equals("fdroid")) {
+            endpoint = "https://us-central1-august-apricot-303508.cloudfunctions.net/save";
+        }
+        final String endpointSave = endpoint;
+
         final Future<Boolean> future = getExecutorService().submit(() -> {
 
             Request request = new Request.Builder()
@@ -91,7 +98,12 @@ public final class CloudFavourites {
 
     @Nullable
     public ReceiveResponse receive(final int timeout, @NonNull final String payload) {
-        final String endpointLoad = BuildConfig.REMOTE_DEVICE_ENDPOINT + "/receive";
+        String endpointLoad = BuildConfig.REMOTE_DEVICE_ENDPOINT + "/receive";
+
+        // F-Droid can't pick up local.properties or CI env vars, so have to hard code :-(
+        if (!BuildConfig.DEBUG && BuildConfig.FLAVOR.equals("fdroid")) {
+            endpointLoad = "https://us-central1-august-apricot-303508.cloudfunctions.net/receive";
+        }
 
         final Request request = new Request.Builder()
                 .url(endpointLoad)
