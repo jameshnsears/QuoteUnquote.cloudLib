@@ -1,4 +1,4 @@
 ignore:
   - "**/test/**/*.kt"
   - "**/test/**/*.java"
-  - "**/src/**/org/apache/commons/codec/**/*.java"
+  - "**/src/**/org/apache/**/*.java"

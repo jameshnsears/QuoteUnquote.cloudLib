@@ -1,5 +1,7 @@
 package com.github.jameshnsears.quoteunquote.cloud;
 
+import android.service.autofill.SaveRequest;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -13,11 +15,11 @@ import org.apache.commons.lang3.RandomStringUtils;
 import timber.log.Timber;
 
 
-public class CloudFavouritesHelper {
+public class CloudTransferHelper {
     @Nullable
     private static String localCode;
 
-    private CloudFavouritesHelper() {
+    private CloudTransferHelper() {
         throw new IllegalStateException("Utility class");
     }
 
@@ -38,24 +40,7 @@ public class CloudFavouritesHelper {
     }
 
     @NonNull
-    public static String jsonReceiveRequest(@NonNull final String remoteCode) {
-        ReceiveRequest receiveRequest = new ReceiveRequest();
-        receiveRequest.code = remoteCode;
-
-        String json = getGson().toJson(receiveRequest);
-        Timber.d("json=%s", json);
-        return json;
-    }
-
-    @NonNull
-    public static String jsonSendRequest(@NonNull final SaveRequest saveRequest) {
-        String json = getGson().toJson(saveRequest);
-        Timber.d("json=%s", json);
-        return json;
-    }
-
-    @NonNull
-    private static Gson getGson() {
+    public static Gson getGson() {
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting();
         return builder.create();

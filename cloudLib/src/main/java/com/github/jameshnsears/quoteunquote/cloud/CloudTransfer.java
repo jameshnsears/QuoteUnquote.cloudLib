@@ -3,6 +3,7 @@ package com.github.jameshnsears.quoteunquote.cloud;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.github.jameshnsears.quoteunquote.cloud.transfer.TransferRestoreResponse;
 import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +25,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import timber.log.Timber;
 
-public final class CloudFavourites {
+public final class CloudTransfer {
     public static final int TIMEOUT_SECONDS = 10;
     private static final String DNS = "8.8.8.8";
     @Nullable
@@ -55,12 +56,12 @@ public final class CloudFavourites {
         }
     }
 
-    public boolean save(@NonNull final String payload) {
-        String endpoint = BuildConfig.REMOTE_DEVICE_ENDPOINT + "/save";
+    public boolean transferBackup(@NonNull final String payload) {
+        String endpoint = BuildConfig.REMOTE_DEVICE_ENDPOINT + "/transfer_backup";
 
         // F-Droid can't pick up local.properties or CI env vars, so have to hard code :-(
         if (!BuildConfig.DEBUG && BuildConfig.FLAVOR.equals("fdroid")) {
-            endpoint = "https://us-central1-august-apricot-303508.cloudfunctions.net/save";
+            endpoint = "https://us-central1-august-apricot-303508.cloudfunctions.net/transfer_backup";
         }
         final String endpointSave = endpoint;
 
@@ -97,12 +98,12 @@ public final class CloudFavourites {
     }
 
     @Nullable
-    public ReceiveResponse receive(final int timeout, @NonNull final String payload) {
-        String endpointLoad = BuildConfig.REMOTE_DEVICE_ENDPOINT + "/receive";
+    public TransferRestoreResponse transferRestore(final int timeout, @NonNull final String payload) {
+        String endpointLoad = BuildConfig.REMOTE_DEVICE_ENDPOINT + "/transfer_restore";
 
         // F-Droid can't pick up local.properties or CI env vars, so have to hard code :-(
         if (!BuildConfig.DEBUG && BuildConfig.FLAVOR.equals("fdroid")) {
-            endpointLoad = "https://us-central1-august-apricot-303508.cloudfunctions.net/receive";
+            endpointLoad = "https://us-central1-august-apricot-303508.cloudfunctions.net/transfer_restore";
         }
 
         final Request request = new Request.Builder()
@@ -119,7 +120,7 @@ public final class CloudFavourites {
                 .build();
 
         Response response = null;
-        ReceiveResponse receiveResponse = null;
+        TransferRestoreResponse receiveResponse = null;
         try {
             final ReceiveResponseFuture future = getReceiveResponseFuture();
             client.newCall(request).enqueue(future);
@@ -128,8 +129,7 @@ public final class CloudFavourites {
             final String responseBody = response.body().string();
             Timber.d("%d", response.code());
 
-            final Gson gson = new Gson();
-            receiveResponse = gson.fromJson(responseBody, ReceiveResponse.class);
+            receiveResponse = new Gson().fromJson(responseBody, TransferRestoreResponse.class);
         } catch (@NonNull ExecutionException | InterruptedException | IOException e) {
             Timber.w(e.toString());
             Thread.currentThread().interrupt();
