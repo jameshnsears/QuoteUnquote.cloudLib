@@ -34,7 +34,7 @@ class TransferTest {
 
         assertTrue(
             "",
-            cloudTransfer.transferBackup(transferJson)
+            cloudTransfer.backup(transferJson)
         )
 
         // give GCP time to populate Firestore
@@ -48,7 +48,7 @@ class TransferTest {
         val transferRestoreRequestJson = gson.toJson(TransferRestoreRequest(transferCode))
 
         val transferRestoreResponse =
-            cloudTransfer.transferRestore(
+            cloudTransfer.restore(
                 CloudTransfer.TIMEOUT_SECONDS, transferRestoreRequestJson
             )
 
@@ -64,7 +64,7 @@ class TransferTest {
         val transferRestoreRequestJson = gson.toJson(TransferRestoreRequest(transferCode))
 
         val transferRestoreResponse =
-            cloudTransfer.transferRestore(
+            cloudTransfer.restore(
                 CloudTransfer.TIMEOUT_SECONDS, transferRestoreRequestJson
             )
 
