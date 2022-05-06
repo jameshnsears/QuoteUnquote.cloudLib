@@ -56,7 +56,7 @@ public final class CloudTransfer {
         }
     }
 
-    public boolean backup(@NonNull final String payload) {
+    public boolean backup(@NonNull final String transferJson) {
         String endpoint = BuildConfig.REMOTE_DEVICE_ENDPOINT + "/transfer_backup";
 
         // F-Droid can't pick up local.properties or CI env vars, so have to hard code :-(
@@ -70,7 +70,7 @@ public final class CloudTransfer {
             Request request = new Request.Builder()
                     .url(endpointSave)
                     .post(RequestBody.create(
-                            payload,
+                            transferJson,
                             MediaType.get("application/json; charset=utf-8")))
                     .build();
 
@@ -98,7 +98,9 @@ public final class CloudTransfer {
     }
 
     @Nullable
-    public TransferRestoreResponse restore(final int timeout, @NonNull final String payload) {
+    public TransferRestoreResponse restore(final int timeout, @NonNull final String restoreRequestJson) {
+        Timber.d(restoreRequestJson);
+
         String endpointLoad = BuildConfig.REMOTE_DEVICE_ENDPOINT + "/transfer_restore";
 
         // F-Droid can't pick up local.properties or CI env vars, so have to hard code :-(
@@ -109,7 +111,7 @@ public final class CloudTransfer {
         final Request request = new Request.Builder()
                 .url(endpointLoad)
                 .post(RequestBody.create(
-                        payload,
+                        restoreRequestJson,
                         MediaType.get("application/json; charset=utf-8")))
                 .build();
 
