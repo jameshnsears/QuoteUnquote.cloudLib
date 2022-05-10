@@ -104,6 +104,7 @@ android {
         warningsAsErrors false
         xmlReport false
     }
+    namespace 'com.github.jameshnsears.quoteunquote.cloud'
 }
 
 dependencies {
