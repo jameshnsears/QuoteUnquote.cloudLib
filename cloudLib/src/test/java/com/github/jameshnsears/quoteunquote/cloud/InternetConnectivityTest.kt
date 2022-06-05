@@ -6,7 +6,6 @@ import io.mockk.mockk
 import io.mockk.spyk
 import org.junit.After
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import java.io.IOException
