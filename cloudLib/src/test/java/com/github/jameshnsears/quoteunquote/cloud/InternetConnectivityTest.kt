@@ -1,6 +1,8 @@
 package com.github.jameshnsears.quoteunquote.cloud
 
+import android.content.Context
 import io.mockk.every
+import io.mockk.mockk
 import io.mockk.spyk
 import org.junit.After
 import org.junit.Assert.assertFalse
@@ -23,19 +25,14 @@ class InternetConnectivityTest {
     }
 
     @Test
-    fun internetAvailable() {
-        assertTrue("", cloudTransfer.isInternetAvailable)
-    }
-
-    @Test
     fun internetNotAvailable() {
         every { cloudTransfer.socket } throws IOException()
-        assertFalse("", cloudTransfer.isInternetAvailable)
+        assertFalse("", cloudTransfer.isInternetAvailable(mockk<Context>()))
     }
 
     @Test
     fun internetDisappearedMidWay() {
         every { cloudTransfer.socket } throws InterruptedException()
-        assertFalse("", cloudTransfer.isInternetAvailable)
+        assertFalse("", cloudTransfer.isInternetAvailable(mockk<Context>()))
     }
 }
