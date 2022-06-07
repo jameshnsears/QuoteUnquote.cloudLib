@@ -55,4 +55,8 @@ data class Appearance(
     @SerializedName("APPEARANCE_TOOLBAR_SEQUENTIAL")
     @Keep
     val appearanceToolbarSequential: Boolean,
+
+    @SerializedName("APPEARANCE_REMOVE_SPACE_ABOVE_TOOLBAR")
+    @Keep
+    val appearanceToolbarHideSeparator: Boolean,
 )
