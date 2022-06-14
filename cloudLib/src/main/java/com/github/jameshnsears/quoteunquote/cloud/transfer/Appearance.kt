@@ -12,6 +12,8 @@ data class Appearance(
     @Keep
     val appearanceColour: String,
 
+    ////////////////////
+
     @SerializedName("APPEARANCE_TEXT_FAMILY")
     @Keep
     val appearanceTextFamily: String,
@@ -27,6 +29,56 @@ data class Appearance(
     @SerializedName("APPEARANCE_TEXT_COLOUR")
     @Keep
     val appearanceTextColour: String,
+
+    ////////////////////
+
+    @SerializedName("APPEARANCE_AUTHOR_TEXT_FAMILY")
+    @Keep
+    val appearanceAuthorTextFamily: String,
+
+    @SerializedName("APPEARANCE_AUTHOR_TEXT_STYLE")
+    @Keep
+    val appearanceAuthorTextStyle: String,
+
+    @SerializedName("APPEARANCE_AUTHOR_TEXT_SIZE")
+    @Keep
+    val appearanceAuthorTextSize: Int,
+
+    @SerializedName("APPEARANCE_AUTHOR_TEXT_COLOUR")
+    @Keep
+    val appearanceAuthorTextColour: String,
+
+    @SerializedName("APPEARANCE_AUTHOR_TEXT_HIDE")
+    @Keep
+    val appearanceAuthorTextHide: Boolean,
+
+    ////////////////////
+
+    @SerializedName("APPEARANCE_POSITION_TEXT_FAMILY")
+    @Keep
+    val appearancePositionTextFamily: String,
+
+    @SerializedName("APPEARANCE_POSITION_TEXT_STYLE")
+    @Keep
+    val appearancePositionTextStyle: String,
+
+    @SerializedName("APPEARANCE_POSITION_TEXT_SIZE")
+    @Keep
+    val appearancePositionTextSize: Int,
+
+    @SerializedName("APPEARANCE_POSITION_TEXT_COLOUR")
+    @Keep
+    val appearancePositionTextColour: String,
+
+    @SerializedName("APPEARANCE_POSITION_TEXT_HIDE")
+    @Keep
+    val appearancePositionTextHide: Boolean,
+
+    ////////////////////
+
+    @SerializedName("APPEARANCE_REMOVE_SPACE_ABOVE_TOOLBAR")
+    @Keep
+    val appearanceToolbarHideSeparator: Boolean,
 
     @SerializedName("APPEARANCE_TOOLBAR_COLOUR")
     @Keep
@@ -54,9 +106,5 @@ data class Appearance(
 
     @SerializedName("APPEARANCE_TOOLBAR_SEQUENTIAL")
     @Keep
-    val appearanceToolbarSequential: Boolean,
-
-    @SerializedName("APPEARANCE_REMOVE_SPACE_ABOVE_TOOLBAR")
-    @Keep
-    val appearanceToolbarHideSeparator: Boolean,
+    val appearanceToolbarSequential: Boolean
 )
