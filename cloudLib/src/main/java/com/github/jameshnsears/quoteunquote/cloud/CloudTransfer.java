@@ -1,7 +1,6 @@
 package com.github.jameshnsears.quoteunquote.cloud;
 
 import android.content.Context;
-import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -154,13 +153,6 @@ public final class CloudTransfer {
 
     public boolean isInternetAvailable(Context context) {
         final Future<Boolean> future = getExecutorService().submit(() -> {
-
-            if (Settings.System.getInt(
-                    context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0)
-                    != 0) {
-                return false;
-            }
-
             try (Socket socket = getSocket()) {
                 socket.connect(new InetSocketAddress(DNS, 53), 1500);
                 return true;
