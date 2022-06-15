@@ -12,8 +12,6 @@ data class Appearance(
     @Keep
     val appearanceColour: String,
 
-    ////////////////////
-
     @SerializedName("APPEARANCE_TEXT_FAMILY")
     @Keep
     val appearanceTextFamily: String,
@@ -29,8 +27,6 @@ data class Appearance(
     @SerializedName("APPEARANCE_TEXT_COLOUR")
     @Keep
     val appearanceTextColour: String,
-
-    ////////////////////
 
     @SerializedName("APPEARANCE_AUTHOR_TEXT_FAMILY")
     @Keep
@@ -52,8 +48,6 @@ data class Appearance(
     @Keep
     val appearanceAuthorTextHide: Boolean,
 
-    ////////////////////
-
     @SerializedName("APPEARANCE_POSITION_TEXT_FAMILY")
     @Keep
     val appearancePositionTextFamily: String,
@@ -73,8 +67,6 @@ data class Appearance(
     @SerializedName("APPEARANCE_POSITION_TEXT_HIDE")
     @Keep
     val appearancePositionTextHide: Boolean,
-
-    ////////////////////
 
     @SerializedName("APPEARANCE_REMOVE_SPACE_ABOVE_TOOLBAR")
     @Keep
