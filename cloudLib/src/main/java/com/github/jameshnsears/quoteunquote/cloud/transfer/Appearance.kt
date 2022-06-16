@@ -28,14 +28,6 @@ data class Appearance(
     @Keep
     val appearanceTextColour: String,
 
-    @SerializedName("APPEARANCE_AUTHOR_TEXT_FAMILY")
-    @Keep
-    val appearanceAuthorTextFamily: String,
-
-    @SerializedName("APPEARANCE_AUTHOR_TEXT_STYLE")
-    @Keep
-    val appearanceAuthorTextStyle: String,
-
     @SerializedName("APPEARANCE_AUTHOR_TEXT_SIZE")
     @Keep
     val appearanceAuthorTextSize: Int,
@@ -47,14 +39,6 @@ data class Appearance(
     @SerializedName("APPEARANCE_AUTHOR_TEXT_HIDE")
     @Keep
     val appearanceAuthorTextHide: Boolean,
-
-    @SerializedName("APPEARANCE_POSITION_TEXT_FAMILY")
-    @Keep
-    val appearancePositionTextFamily: String,
-
-    @SerializedName("APPEARANCE_POSITION_TEXT_STYLE")
-    @Keep
-    val appearancePositionTextStyle: String,
 
     @SerializedName("APPEARANCE_POSITION_TEXT_SIZE")
     @Keep
