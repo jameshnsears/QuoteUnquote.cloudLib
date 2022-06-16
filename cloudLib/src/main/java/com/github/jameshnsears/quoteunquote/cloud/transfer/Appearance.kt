@@ -20,6 +20,10 @@ data class Appearance(
     @Keep
     val appearanceTextStyle: String,
 
+    @SerializedName("APPEARANCE_TEXT_FORCE_ITALIC_REGULAR")
+    @Keep
+    val appearanceTextForceItalicRegular: Boolean,
+
     @SerializedName("APPEARANCE_TEXT_SIZE")
     @Keep
     val appearanceTextSize: Int,
