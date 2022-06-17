@@ -30,7 +30,7 @@ class InternetConnectivityTest {
     }
 
     @Test
-    fun internetDisappearedMidWay() {
+    fun internetDisappearedMidway() {
         every { cloudTransfer.socket } throws InterruptedException()
         assertFalse("", cloudTransfer.isInternetAvailable(mockk<Context>()))
     }
