@@ -34,5 +34,5 @@ data class Schedule(
 
     @SerializedName("EVENT_DAILY_HOUR")
     @Keep
-    val eventDailyHour: Int,
+    val eventDailyHour: Int
 )

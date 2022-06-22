@@ -49,7 +49,8 @@ class TransferTest {
 
         val transferRestoreResponse =
             cloudTransfer.restore(
-                CloudTransfer.TIMEOUT_SECONDS, transferRestoreRequestJson
+                CloudTransfer.TIMEOUT_SECONDS,
+                transferRestoreRequestJson
             )
 
         assertTrue("", transferRestoreResponse?.transfer?.code == transferCode)
@@ -65,7 +66,8 @@ class TransferTest {
 
         val transferRestoreResponse =
             cloudTransfer.restore(
-                CloudTransfer.TIMEOUT_SECONDS, transferRestoreRequestJson
+                CloudTransfer.TIMEOUT_SECONDS,
+                transferRestoreRequestJson
             )
 
         assertTrue("", transferRestoreResponse?.transfer?.code == null)
