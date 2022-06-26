@@ -10,5 +10,9 @@ data class Favourite(
 
     @SerializedName("navigation")
     @Keep
-    val navigation: Int
+    val navigation: Int,
+
+    @SerializedName("db")
+    @Keep
+    val db: String
 )

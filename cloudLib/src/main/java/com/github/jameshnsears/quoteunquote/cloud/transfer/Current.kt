@@ -10,5 +10,9 @@ data class Current(
 
     @SerializedName("widget_id")
     @Keep
-    val widgetId: Int
+    val widgetId: Int,
+
+    @SerializedName("db")
+    @Keep
+    val db: String
 )

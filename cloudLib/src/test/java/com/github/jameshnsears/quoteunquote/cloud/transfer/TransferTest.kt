@@ -88,20 +88,24 @@ class TransferTest {
 
         return Transfer(
             code,
-            listOf(Current(digest, widgetId)),
-            listOf(Favourite(digest, 1)),
-            listOf(Previous(contentType, digest, 1, widgetId)),
+            listOf(Current(digest, widgetId, "internal")),
+            listOf(Favourite(digest, 1, "internal")),
+            listOf(Previous(contentType, digest, 1, widgetId, "internal")),
             listOf(
                 Settings(
                     Quotations(
                         true,
                         true,
                         false,
+                        false,
                         "",
                         false,
                         false,
+                        false,
                         0,
-                        ""
+                        "",
+                        true,
+                        false
                     ),
                     Appearance(
                         0,
