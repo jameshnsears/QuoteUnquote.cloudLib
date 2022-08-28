@@ -16,10 +16,6 @@ data class Quotations(
     @Keep
     val contentAuthor: Boolean,
 
-    @SerializedName("CONTENT_AUTHOR_SHOW_ALL")
-    @Keep
-    val contentAuthorShowAll: Boolean,
-
     @SerializedName("CONTENT_AUTHOR_NAME")
     @Keep
     val contentAuthorName: String,
