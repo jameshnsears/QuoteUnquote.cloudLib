@@ -80,6 +80,10 @@ data class Appearance(
     @Keep
     val appearanceToolbarShare: Boolean,
 
+    @SerializedName("APPEARANCE_TOOLBAR_JUMP")
+    @Keep
+    val appearanceToolbarJump: Boolean,
+
     @SerializedName("APPEARANCE_TOOLBAR_RANDOM")
     @Keep
     val appearanceToolbarRandom: Boolean,
