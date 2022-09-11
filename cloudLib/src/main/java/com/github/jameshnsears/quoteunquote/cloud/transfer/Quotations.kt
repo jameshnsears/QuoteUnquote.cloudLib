@@ -16,6 +16,10 @@ data class Quotations(
     @Keep
     val contentAuthor: Boolean,
 
+    @SerializedName("CONTENT_AUTHOR_NAME_COUNT")
+    @Keep
+    val contentAuthorNameCount: Int,
+
     @SerializedName("CONTENT_AUTHOR_NAME")
     @Keep
     val contentAuthorName: String,
