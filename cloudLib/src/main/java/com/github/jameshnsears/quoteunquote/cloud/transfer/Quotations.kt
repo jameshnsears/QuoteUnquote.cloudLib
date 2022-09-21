@@ -12,6 +12,10 @@ data class Quotations(
     @Keep
     val contentAll: Boolean,
 
+    @SerializedName("CONTENT_ALL_EXCLUSION")
+    @Keep
+    val contentAllExclusion: String,
+
     @SerializedName("CONTENT_AUTHOR")
     @Keep
     val contentAuthor: Boolean,

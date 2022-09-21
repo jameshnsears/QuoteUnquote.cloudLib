@@ -1,7 +1,5 @@
 package com.github.jameshnsears.quoteunquote.cloud;
 
-import android.service.autofill.SaveRequest;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -12,10 +10,8 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 
-import timber.log.Timber;
 
-
-public class CloudTransferHelper {
+public final class CloudTransferHelper {
     @Nullable
     private static String localCode;
 
