@@ -24,6 +24,10 @@ data class Appearance(
     @Keep
     val appearanceTextForceItalicRegular: Boolean,
 
+    @SerializedName("APPEARANCE_TEXT_CENTER")
+    @Keep
+    val appearanceTextCenter: Boolean,
+
     @SerializedName("APPEARANCE_TEXT_SIZE")
     @Keep
     val appearanceTextSize: Int,
