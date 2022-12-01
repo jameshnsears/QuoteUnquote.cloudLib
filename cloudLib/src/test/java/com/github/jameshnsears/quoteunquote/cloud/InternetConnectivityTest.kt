@@ -26,12 +26,12 @@ class InternetConnectivityTest {
     @Test
     fun internetNotAvailable() {
         every { cloudTransfer.socket } throws IOException()
-        assertFalse("", cloudTransfer.isInternetAvailable(mockk<Context>()))
+        assertFalse("", cloudTransfer.isInternetAvailable(mockk()))
     }
 
     @Test
     fun internetDisappearedMidway() {
         every { cloudTransfer.socket } throws InterruptedException()
-        assertFalse("", cloudTransfer.isInternetAvailable(mockk<Context>()))
+        assertFalse("", cloudTransfer.isInternetAvailable(mockk()))
     }
 }
