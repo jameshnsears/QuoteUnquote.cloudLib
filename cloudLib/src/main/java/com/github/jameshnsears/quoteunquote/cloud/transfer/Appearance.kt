@@ -84,6 +84,10 @@ data class Appearance(
     @Keep
     val appearanceToolbarShare: Boolean,
 
+    @SerializedName("APPEARANCE_TOOLBAR_SHARE_NO_SOURCE")
+    @Keep
+    val appearanceToolbarShareNoSource: Boolean,
+
     @SerializedName("APPEARANCE_TOOLBAR_JUMP")
     @Keep
     val appearanceToolbarJump: Boolean,
