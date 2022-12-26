@@ -14,5 +14,5 @@ data class Favourite(
 
     @SerializedName("db")
     @Keep
-    val db: String
+    val db: String,
 )

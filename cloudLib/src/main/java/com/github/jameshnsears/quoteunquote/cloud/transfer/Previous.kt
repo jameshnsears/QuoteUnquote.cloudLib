@@ -22,5 +22,5 @@ data class Previous(
 
     @SerializedName("db")
     @Keep
-    val db: String
+    val db: String,
 )

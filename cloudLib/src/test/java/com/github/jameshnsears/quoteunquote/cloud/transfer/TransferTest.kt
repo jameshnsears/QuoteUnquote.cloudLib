@@ -34,7 +34,7 @@ class TransferTest {
 
         assertTrue(
             "",
-            cloudTransfer.backup(transferJson)
+            cloudTransfer.backup(transferJson),
         )
 
         // give GCP time to populate Firestore
@@ -50,7 +50,7 @@ class TransferTest {
         val transferRestoreResponse =
             cloudTransfer.restore(
                 CloudTransfer.TIMEOUT_SECONDS,
-                transferRestoreRequestJson
+                transferRestoreRequestJson,
             )
 
         assertTrue("", transferRestoreResponse?.transfer?.code == transferCode)
@@ -67,7 +67,7 @@ class TransferTest {
         val transferRestoreResponse =
             cloudTransfer.restore(
                 CloudTransfer.TIMEOUT_SECONDS,
-                transferRestoreRequestJson
+                transferRestoreRequestJson,
             )
 
         assertTrue("", transferRestoreResponse?.transfer?.code == null)
@@ -91,7 +91,7 @@ class TransferTest {
             listOf(Current(digest, widgetId, "internal")),
             listOf(Favourite(digest, 1, "internal")),
             listOf(Previous(contentType, digest, 1, widgetId, "internal")),
-            listOf(settings(widgetId))
+            listOf(settings(widgetId)),
         )
     }
 
@@ -109,7 +109,7 @@ class TransferTest {
             0,
             "",
             true,
-            false
+            false,
         ),
         Appearance(
             0,
@@ -135,7 +135,7 @@ class TransferTest {
             true,
             false,
             false,
-            false
+            false,
         ),
         Schedule(
             false,
@@ -145,8 +145,9 @@ class TransferTest {
             false,
             false,
             0,
-            0
+            0,
+            false,
         ),
-        widgetId
+        widgetId,
     )
 }

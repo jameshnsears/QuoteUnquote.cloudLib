@@ -54,5 +54,5 @@ data class Quotations(
 
     @SerializedName("DATABASE_EXTERNAL")
     @Keep
-    val databaseExternal: Boolean
+    val databaseExternal: Boolean,
 )

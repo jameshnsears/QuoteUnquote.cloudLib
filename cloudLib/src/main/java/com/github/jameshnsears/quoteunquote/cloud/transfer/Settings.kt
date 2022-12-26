@@ -15,5 +15,5 @@ data class Settings(
     val schedule: Schedule,
     @SerializedName("widget_id")
     @Keep
-    val widgetId: Int
+    val widgetId: Int,
 )

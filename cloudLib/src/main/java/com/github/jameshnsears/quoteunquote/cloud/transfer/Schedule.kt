@@ -34,5 +34,9 @@ data class Schedule(
 
     @SerializedName("EVENT_DAILY_HOUR")
     @Keep
-    val eventDailyHour: Int
+    val eventDailyHour: Int,
+
+    @SerializedName("EVENT_BIHOURLY")
+    @Keep
+    val eventEventBihourly: Boolean,
 )

@@ -14,5 +14,5 @@ data class TransferRestoreResponse(
 
     @SerializedName("reason")
     @Keep
-    val reason: String
+    val reason: String,
 )

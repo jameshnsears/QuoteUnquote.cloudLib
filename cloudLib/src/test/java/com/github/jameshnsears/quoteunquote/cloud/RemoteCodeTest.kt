@@ -10,8 +10,8 @@ class RemoteCodeTest {
     fun remoteCode() {
         assertTrue(
             CloudTransferHelper.isRemoteCodeValid(
-                CloudTransferHelper.getLocalCode()
-            )
+                CloudTransferHelper.getLocalCode(),
+            ),
         )
 
         val localCode = CloudTransferHelper.getLocalCode()

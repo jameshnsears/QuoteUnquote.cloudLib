@@ -22,5 +22,5 @@ data class Transfer(
 
     @SerializedName("settings")
     @Keep
-    val settings: List<Settings>
+    val settings: List<Settings>,
 )
