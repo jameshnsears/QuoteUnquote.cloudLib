@@ -18,7 +18,11 @@ data class Schedule(
 
     @SerializedName("EVENT_DISPLAY_WIDGET_AND_NOTIFICATION")
     @Keep
-    val eventDisplayAidgetAndNotification: Boolean,
+    val eventDisplayWidgetAndNotification: Boolean,
+
+    @SerializedName("EVENT_EXCLUDE_SOURCE_FROM_NOTIFICATION")
+    @Keep
+    val eventExcludeSourceFromNotification: Boolean,
 
     @SerializedName("EVENT_DAILY")
     @Keep
