@@ -22,11 +22,15 @@ public final class CloudTransferHelper {
     @NonNull
     public static synchronized String getLocalCode() {
         if (localCode == null) {
-            final String rootCode = RandomStringUtils.randomAlphanumeric(8);
-            final String crc = new String(Hex.encodeHex(DigestUtils.md5(rootCode)));
-            localCode = rootCode + crc.substring(0, 2);
+            localCode = generateNewCode();
         }
         return localCode;
+    }
+
+    public static synchronized String generateNewCode() {
+        final String rootCode = RandomStringUtils.randomAlphanumeric(8);
+        final String crc = new String(Hex.encodeHex(DigestUtils.md5(rootCode)));
+        return rootCode + crc.substring(0, 2);
     }
 
     public static boolean isRemoteCodeValid(@NonNull final String remoteCode) {
