@@ -66,6 +66,37 @@ android {
         jvmTarget = 11
     }
 
+    flavorDimensions 'Version'
+    productFlavors {
+        'fdroid' {
+            dimension 'Version'
+        }
+        'googleplay' {
+            dimension 'Version'
+        }
+        'espresso' {
+            dimension 'Version'
+        }
+        'uiautomator' {
+            dimension 'Version'
+        }
+    }
+
+    sourceSets {
+        fdroid {
+            java.srcDirs = ['src/main/java']
+        }
+        googleplay {
+            java.srcDirs = ['src/main/java']
+        }
+        espresso {
+            java.srcDirs = ['src/main/java']
+        }
+        uiautomator {
+            java.srcDirs = ['src/main/java']
+        }
+    }
+
     testOptions {
         unitTests {
             includeAndroidResources = true
