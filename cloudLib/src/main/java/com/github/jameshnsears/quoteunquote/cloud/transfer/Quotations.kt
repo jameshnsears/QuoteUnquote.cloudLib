@@ -55,4 +55,20 @@ data class Quotations(
     @SerializedName("DATABASE_EXTERNAL")
     @Keep
     val databaseExternal: Boolean,
+
+    @SerializedName("DATABASE_EXTERNAL_WEB")
+    @Keep
+    val databaseExternalWeb: Boolean,
+
+    @SerializedName("DATABASE_WEB_URL")
+    @Keep
+    val databaseWebUrl: String,
+
+    @SerializedName("DATABASE_WEB_XPATH_QUOTATION")
+    @Keep
+    val databaseWebXpathQuotation: String,
+
+    @SerializedName("DATABASE_WEB_XPATH_SOURCE")
+    @Keep
+    val databaseWebXpathSource: String,
 )
