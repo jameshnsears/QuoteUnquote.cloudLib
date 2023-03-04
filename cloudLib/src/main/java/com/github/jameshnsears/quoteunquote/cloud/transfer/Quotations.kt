@@ -71,4 +71,8 @@ data class Quotations(
     @SerializedName("DATABASE_WEB_XPATH_SOURCE")
     @Keep
     val databaseWebXpathSource: String,
+
+    @SerializedName("DATABASE_WEB_KEEP_LATEST_ONLY")
+    @Keep
+    val databaseWebKeepLatestOnly: Boolean,
 )
