@@ -31,6 +31,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
         def remoteDeviceEndpointProd = System.getenv("REMOTE_DEVICE_ENDPOINT_PRODUCTION")
         if (remoteDeviceEndpointProd == null) {
