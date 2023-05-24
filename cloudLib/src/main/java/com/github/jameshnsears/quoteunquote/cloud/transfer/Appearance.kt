@@ -60,9 +60,9 @@ data class Appearance(
     @Keep
     val appearancePositionTextHide: Boolean,
 
-    @SerializedName("APPEARANCE_REMOVE_SPACE_ABOVE_TOOLBAR")
+    @SerializedName("APPEARANCE_FORCE_FOLLOW_SYSTEM_THEME")
     @Keep
-    val appearanceToolbarHideSeparator: Boolean,
+    val appearanceForceFollowSystemTheme: Boolean,
 
     @SerializedName("APPEARANCE_TOOLBAR_COLOUR")
     @Keep
