@@ -117,9 +117,9 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.annotation:annotation:1.7.0'
+    implementation 'androidx.annotation:annotation:1.7.1'
     implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'org.apache.commons:commons-lang3:3.13.0'
+    implementation 'org.apache.commons:commons-lang3:3.14.0'
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.jakewharton.timber:timber:5.0.1'
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
@@ -127,7 +127,7 @@ dependencies {
 
     testImplementation 'androidx.test.ext:junit:1.1.5'
     testImplementation 'androidx.test:runner:1.5.2'
-    testImplementation 'io.mockk:mockk:1.13.8'
+    testImplementation 'io.mockk:mockk:1.13.10'
     testImplementation 'junit:junit:4.13.2'
 }
 

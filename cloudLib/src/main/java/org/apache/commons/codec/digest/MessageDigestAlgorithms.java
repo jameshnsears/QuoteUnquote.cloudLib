@@ -33,20 +33,19 @@ import java.security.MessageDigest;
  * </p>
  *
  * @see <a href="http://docs.oracle.com/javase/7/docs/technotes/guides/security/StandardNames.html#MessageDigest">
- *      Java 7 Cryptography Architecture Standard Algorithm Name Documentation</a>
+ * Java 7 Cryptography Architecture Standard Algorithm Name Documentation</a>
  * @see <a href="http://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#MessageDigest">
- *      Java 8 Cryptography Architecture Standard Algorithm Name Documentation</a>
+ * Java 8 Cryptography Architecture Standard Algorithm Name Documentation</a>
  * @see <a href="https://docs.oracle.com/javase/9/docs/specs/security/standard-names.html#messagedigest-algorithms">
- *      Java 9 Cryptography Architecture Standard Algorithm Name Documentation</a>
+ * Java 9 Cryptography Architecture Standard Algorithm Name Documentation</a>
  * @see <a href="https://docs.oracle.com/javase/10/docs/specs/security/standard-names.html#messagedigest-algorithms">
- *      Java 10 Cryptography Architecture Standard Algorithm Name Documentation</a>
+ * Java 10 Cryptography Architecture Standard Algorithm Name Documentation</a>
  * @see <a href="https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html#messagedigest-algorithms">
- *      Java 11 Cryptography Architecture Standard Algorithm Name Documentation</a>
+ * Java 11 Cryptography Architecture Standard Algorithm Name Documentation</a>
  * @see <a href="https://docs.oracle.com/en/java/javase/12/docs/specs/security/standard-names.html#messagedigest-algorithms">
- *      Java 12 Cryptography Architecture Standard Algorithm Name Documentation</a>
+ * Java 12 Cryptography Architecture Standard Algorithm Name Documentation</a>
  * @see <a href="https://docs.oracle.com/en/java/javase/13/docs/specs/security/standard-names.html#messagedigest-algorithms">
- *      Java 13 Cryptography Architecture Standard Algorithm Name Documentation</a>
- *
+ * Java 13 Cryptography Architecture Standard Algorithm Name Documentation</a>
  * @see <a href="http://dx.doi.org/10.6028/NIST.FIPS.180-4">FIPS PUB 180-4</a>
  * @see <a href="http://dx.doi.org/10.6028/NIST.FIPS.202">FIPS PUB 202</a>
  * @since 1.7
@@ -153,6 +152,10 @@ public class MessageDigestAlgorithms {
      */
     public static final String SHA3_512 = "SHA3-512";
 
+    private MessageDigestAlgorithms() {
+        // cannot be instantiated.
+    }
+
     /**
      * Gets all constant values defined in this class.
      *
@@ -161,14 +164,10 @@ public class MessageDigestAlgorithms {
      */
     public static String[] values() {
         // N.B. do not use a constant array here as that can be changed externally by accident or design
-        return new String[] {
-            MD2, MD5, SHA_1, SHA_224, SHA_256, SHA_384,
-            SHA_512, SHA_512_224, SHA_512_256, SHA3_224, SHA3_256, SHA3_384, SHA3_512
+        return new String[]{
+                MD2, MD5, SHA_1, SHA_224, SHA_256, SHA_384,
+                SHA_512, SHA_512_224, SHA_512_256, SHA3_224, SHA3_256, SHA3_384, SHA3_512
         };
-    }
-
-    private MessageDigestAlgorithms() {
-        // cannot be instantiated.
     }
 
 }
