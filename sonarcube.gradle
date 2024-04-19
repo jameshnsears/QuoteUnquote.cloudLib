@@ -6,6 +6,6 @@ sonarqube {
         property "sonar.organization", "jameshnsears-github"
         property "sonar.projectName", "QuoteUnquote.cloudLib"
         property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/GoogleplayDebug.xml"
+        property "sonar.java.binaries", "/home/runner/work/QuoteUnquote.cloudLib/QuoteUnquote.cloudLib/cloudLib/build/intermediates/javac/googleplayDebug/compileGoogleplayDebugJavaWithJavac/classes"
     }
 }
