@@ -40,7 +40,7 @@ data class Schedule(
     @Keep
     val eventDailyHour: Int,
 
-    @SerializedName("EVENT_BIHOURLY")
+    @SerializedName("EVENT_CUSTOMISABLE_INTERVAL")
     @Keep
-    val eventEventBihourly: Boolean,
+    val eventEventCustomisableInterval: Boolean,
 )
