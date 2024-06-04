@@ -43,4 +43,16 @@ data class Schedule(
     @SerializedName("EVENT_CUSTOMISABLE_INTERVAL")
     @Keep
     val eventEventCustomisableInterval: Boolean,
+
+    @SerializedName("EVENT_CUSTOMISABLE_INTERVAL_QUANTITY")
+    @Keep
+    val eventEventCustomisableIntervalQuantity: Int,
+
+    @SerializedName("EVENT_CUSTOMISABLE_INTERVAL_HOUR_FROM")
+    @Keep
+    val eventEventCustomisableIntervalHourFrom: Int,
+
+    @SerializedName("EVENT_CUSTOMISABLE_INTERVAL_HOUR_TO")
+    @Keep
+    val eventEventCustomisableIntervalHourTo: Int,
 )

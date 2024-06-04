@@ -13,6 +13,9 @@ data class Settings(
     @SerializedName("schedule")
     @Keep
     val schedule: Schedule,
+    @SerializedName("sync")
+    @Keep
+    val sync: Sync,
     @SerializedName("widget_id")
     @Keep
     val widgetId: Int,
