@@ -153,6 +153,11 @@ class TransferTest {
             0,
             0,
             false,
+            0,
+            23,
+        ),
+        Sync(
+            false
         ),
         widgetId,
     )
