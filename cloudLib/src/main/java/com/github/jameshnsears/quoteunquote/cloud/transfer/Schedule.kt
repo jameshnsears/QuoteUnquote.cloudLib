@@ -51,4 +51,8 @@ data class Schedule(
     @SerializedName("EVENT_CUSTOMISABLE_INTERVAL_HOUR_TO")
     @Keep
     var eventEventCustomisableIntervalHourTo: Int,
+
+    @SerializedName("EVENT_CUSTOMISABLE_INTERVAL_HOURS")
+    @Keep
+    var eventEventCustomisableIntervalHours: Int,
 )
