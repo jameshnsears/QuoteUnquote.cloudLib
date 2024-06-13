@@ -95,54 +95,58 @@ class TransferTest {
         )
     }
 
-    private fun settings(widgetId: Int) = Settings(
-        Quotations(
+    fun settingsQuotations() = Quotations(
+        true,
+        true,
+        "",
+        false,
+        1,
+        "",
+        false,
+        false,
+        false,
+        0,
+        "",
+        true,
+        false,
+        false,
+        "",
+        "",
+        "",
+        false,
+    )
+
+    private fun settings(widgetId: Int): Settings {
+        val quotations = settingsQuotations()
+
+        val appearance = Appearance(
+            0,
+            "",
+            "",
+            "",
+            false,
+            false,
+            0,
+            "",
+            0,
+            "",
+            false,
+            0,
+            "",
+            false,
+            false,
+            "",
+            false,
+            false,
+            false,
+            false,
             true,
-            true,
-            "",
-            false,
-            1,
-            "",
             false,
             false,
             false,
-            0,
-            "",
-            true,
-            false,
-            false,
-            "",
-            "",
-            "",
-            false,
-        ),
-        Appearance(
-            0,
-            "",
-            "",
-            "",
-            false,
-            false,
-            0,
-            "",
-            0,
-            "",
-            false,
-            0,
-            "",
-            false,
-            false,
-            "",
-            false,
-            false,
-            false,
-            false,
-            true,
-            false,
-            false,
-            false,
-        ),
-        Schedule(
+        )
+
+        val schedule = Schedule(
             false,
             true,
             false,
@@ -156,8 +160,14 @@ class TransferTest {
             0,
             23,
             1,
-        ),
-        Sync(false),
-        widgetId,
-    )
+        )
+
+        return Settings(
+            quotations,
+            appearance,
+            schedule,
+            Sync(false),
+            widgetId,
+        )
+    }
 }
