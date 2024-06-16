@@ -28,7 +28,7 @@ import okhttp3.Response;
 import timber.log.Timber;
 
 public final class CloudTransfer {
-    public static final int TIMEOUT_SECONDS = 15;
+    public static final int TIMEOUT_SECONDS = 30;
     private static final String DNS = "8.8.8.8";
     @Nullable
     private static ExecutorService executorService;
