@@ -84,7 +84,9 @@ public final class CloudTransfer {
 
             try {
                 try (Response response = client.newCall(request).execute()) {
-                    return response.isSuccessful();
+                    Boolean r = response.isSuccessful();
+                    Timber.d("autoBackupGoogleCloud.isSuccessful=%b", r);
+                    return r;
                 }
             } catch (SocketTimeoutException e) {
                 return false;
