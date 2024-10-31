@@ -118,7 +118,7 @@ android {
 
 dependencies {
     implementation 'androidx.annotation:annotation:1.9.0'
-    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.core:core-ktx:1.15.0'
 
     // > 3.14 == java.lang.NoSuchMethodError: No static method getInstanceStrong()Ljava/security/SecureRandom
     implementation 'org.apache.commons:commons-lang3:3.14.0'
