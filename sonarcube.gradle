@@ -1,0 +1,11 @@
+apply plugin: 'org.sonarqube'
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "jameshnsears_QuoteUnquote.cloudLib"
+        property "sonar.organization", "jameshnsears-github"
+        property "sonar.projectName", "QuoteUnquote.cloudLib"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.java.binaries", "/home/runner/work/QuoteUnquote.cloudLib/QuoteUnquote.cloudLib/cloudLib/build/intermediates/javac/googleplayDebug/compileGoogleplayDebugJavaWithJavac/classes"
+    }
+}
