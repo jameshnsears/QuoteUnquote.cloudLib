@@ -161,7 +161,7 @@ class TransferTest {
             23,
             1,
             false,
-            true
+            true,
         )
 
         return Settings(
