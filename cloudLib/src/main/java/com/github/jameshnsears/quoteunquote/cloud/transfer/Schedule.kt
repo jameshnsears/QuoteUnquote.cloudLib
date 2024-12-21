@@ -55,4 +55,12 @@ data class Schedule(
     @SerializedName("EVENT_CUSTOMISABLE_INTERVAL_HOURS")
     @Keep
     var eventEventCustomisableIntervalHours: Int,
+
+    @SerializedName("EVENT_TTS_SYSTEM")
+    @Keep
+    val eventEventTtsSystem: Boolean,
+
+    @SerializedName("EVENT_TTS_UK")
+    @Keep
+    val eventEventTtsUk: Boolean,
 )
