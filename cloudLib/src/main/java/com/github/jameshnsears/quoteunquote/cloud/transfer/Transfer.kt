@@ -10,7 +10,7 @@ data class Transfer(
 
     @SerializedName("current")
     @Keep
-    val current: List<Current>,
+    var current: List<Current>,
 
     @SerializedName("favourite")
     @Keep
@@ -18,9 +18,9 @@ data class Transfer(
 
     @SerializedName("previous")
     @Keep
-    val previous: List<Previous>,
+    var previous: List<Previous>,
 
     @SerializedName("settings")
     @Keep
-    val settings: List<Settings>,
+    var settings: List<Settings>,
 )
