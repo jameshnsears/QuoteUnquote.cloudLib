@@ -121,7 +121,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.15.0'
 
     // > 3.14 == java.lang.NoSuchMethodError: No static method getInstanceStrong()Ljava/security/SecureRandom
-    implementation 'org.apache.commons:commons-lang3:3.14.0'
+    implementation 'org.apache.commons:commons-lang3:3.17.0'
 
     implementation 'commons-codec:commons-codec:1.17.2'
     implementation 'com.google.code.gson:gson:2.11.0'
