@@ -9,24 +9,24 @@ apply from: '../ktlint.gradle'
 apply from: '../detekt.gradle'
 apply from: '../sonarqube.gradle'
 
-def localPropertiesFile = file(project(':cloudLib').projectDir.path + "/local.properties")
-def localProperties = new Properties()
+final def localPropertiesFile = file(project(':cloudLib').projectDir.path + "/local.properties")
+final def localProperties = new Properties()
 
 if (!localPropertiesFile.exists()) {
     localProperties.setProperty("REMOTE_DEVICE_ENDPOINT_PRODUCTION", "")
     localProperties.setProperty("REMOTE_DEVICE_ENDPOINT_DEVELOPMENT", "")
 
-    Writer writer = new FileWriter(localPropertiesFile, false)
+    final Writer writer = new FileWriter(localPropertiesFile, false)
     localProperties.store(writer, "empty, as creating the file is done manually via gpg")
     writer.close()
 }
 
 android {
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 35
+        targetSdkVersion 36
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,14 +38,14 @@ android {
     buildTypes {
         def remoteDeviceEndpointProd = System.getenv("REMOTE_DEVICE_ENDPOINT_PRODUCTION")
         if (remoteDeviceEndpointProd == null) {
-            Properties properties = new Properties()
+            final Properties properties = new Properties()
             properties.load(project.file('local.properties').newDataInputStream())
             remoteDeviceEndpointProd = properties.getProperty('REMOTE_DEVICE_ENDPOINT_PRODUCTION')
         }
 
         def remoteDeviceEndpointDev = System.getenv("REMOTE_DEVICE_ENDPOINT_DEVELOPMENT")
         if (remoteDeviceEndpointDev == null) {
-            Properties properties = new Properties()
+            final Properties properties = new Properties()
             properties.load(project.file('local.properties').newDataInputStream())
             remoteDeviceEndpointDev = properties.getProperty('REMOTE_DEVICE_ENDPOINT_DEVELOPMENT')
         }
