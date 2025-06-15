@@ -22,11 +22,11 @@ if (!localPropertiesFile.exists()) {
 }
 
 android {
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 35
+        targetSdkVersion 36
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -56,6 +56,7 @@ android {
 
             buildConfigField("String", "REMOTE_DEVICE_ENDPOINT", "\"$remoteDeviceEndpointProd\"")
         }
+        
         debug {
             buildConfigField("String", "REMOTE_DEVICE_ENDPOINT", "\"$remoteDeviceEndpointDev\"")
         }
@@ -106,6 +107,7 @@ android {
             includeAndroidResources = true
         }
     }
+
     lint {
         abortOnError true
         checkAllWarnings true
@@ -113,6 +115,7 @@ android {
         warningsAsErrors false
         xmlReport false
     }
+
     namespace 'com.github.jameshnsears.quoteunquote.cloud'
 }
 
