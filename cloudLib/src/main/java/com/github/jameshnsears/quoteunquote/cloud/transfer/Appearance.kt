@@ -99,4 +99,8 @@ data class Appearance(
     @SerializedName("APPEARANCE_TOOLBAR_SEQUENTIAL")
     @Keep
     val appearanceToolbarSequential: Boolean,
+
+    @SerializedName("APPEARANCE_TOOLBAR_POSITION")
+    @Keep
+    val appearanceToolbarPosition: Int,
 )
