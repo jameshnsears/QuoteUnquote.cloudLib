@@ -53,8 +53,3 @@ jobs:
         run: |
           ./gradlew :cloudlib:testGoogleplayDebugCoverage
           find . -type f
-
-      - name: publish
-        run: |
-          set -x
-          bash <(curl https://codecov.io/bash) -t ${{ secrets.CODECOVIO_TOKEN }} -f cloudLib/build/reports/GoogleplayDebug.xml
