@@ -34,7 +34,7 @@ jobs:
         run: echo "$LOCAL_PROPERTIES" | base64 -d > cloudLib/local.properties
 
       - name: setup gradle
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@v6
 
       - name: cloudlib
         run: |
