@@ -132,13 +132,23 @@ public final class CloudTransfer {
             client.newCall(request).enqueue(future);
 
             response = future.get();
-            final String responseBody = response.body().string();
-            Timber.d("%d", response.code());
 
-            receiveResponse = new Gson().fromJson(responseBody, TransferRestoreResponse.class);
+            if (response != null) {
+                okhttp3.ResponseBody body = response.body();
+                if (body != null) {
+                    final String responseBody = body.string();
+                    Timber.d("Response code: %d", response.code());
+                    receiveResponse = new Gson().fromJson(responseBody, TransferRestoreResponse.class);
+                } else {
+                    Timber.w("Response body was null");
+                }
+            }
+
         } catch (@NonNull ExecutionException | InterruptedException | IOException e) {
             Timber.w(e.toString());
-            Thread.currentThread().interrupt();
+            if (e instanceof InterruptedException) {
+                Thread.currentThread().interrupt();
+            }
         } finally {
             if (response != null) {
                 response.close();
