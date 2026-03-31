@@ -47,11 +47,12 @@ public final class CloudTransfer {
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 executorService.shutdown();
                 try {
-                    if (!executorService.awaitTermination(5000, TimeUnit.MICROSECONDS)) {
+                    if (!executorService.awaitTermination(5000, TimeUnit.MILLISECONDS)) {
                         Timber.d("awaitTermination=timeout");
                     }
                 } catch (@NonNull InterruptedException e) {
                     Timber.e(e);
+                    Thread.currentThread().interrupt();
                 }
                 Timber.d(executorService.toString());
             }));
