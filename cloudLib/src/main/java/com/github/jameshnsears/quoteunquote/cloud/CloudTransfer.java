@@ -19,6 +19,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -95,8 +96,8 @@ public final class CloudTransfer {
         });
 
         try {
-            return future.get();
-        } catch (@NonNull ExecutionException | InterruptedException e) {
+            return future.get(TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        } catch (@NonNull ExecutionException | InterruptedException | TimeoutException e) {
             Thread.currentThread().interrupt();
             return false;
         }
@@ -132,7 +133,7 @@ public final class CloudTransfer {
             final ReceiveResponseFuture future = getReceiveResponseFuture();
             client.newCall(request).enqueue(future);
 
-            response = future.get();
+            response = future.get(timeout, TimeUnit.SECONDS);
 
             if (response != null) {
                 okhttp3.ResponseBody body = response.body();
@@ -145,7 +146,7 @@ public final class CloudTransfer {
                 }
             }
 
-        } catch (@NonNull ExecutionException | InterruptedException | IOException e) {
+        } catch (@NonNull ExecutionException | InterruptedException | IOException | TimeoutException e) {
             Timber.w(e.toString());
             if (e instanceof InterruptedException) {
                 Thread.currentThread().interrupt();
@@ -176,10 +177,10 @@ public final class CloudTransfer {
         });
 
         try {
-            boolean available = future.get();
+            boolean available = future.get(TIMEOUT_SECONDS, TimeUnit.SECONDS);
             Timber.d("isInternetAvailable=%b", available);
             return available;
-        } catch (@NonNull ExecutionException | InterruptedException e) {
+        } catch (@NonNull ExecutionException | InterruptedException | TimeoutException e) {
             Thread.currentThread().interrupt();
             return false;
         }
