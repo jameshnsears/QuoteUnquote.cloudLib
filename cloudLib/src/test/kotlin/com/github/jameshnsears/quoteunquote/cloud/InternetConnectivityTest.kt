@@ -1,7 +1,6 @@
 package com.github.jameshnsears.quoteunquote.cloud
 
 import io.mockk.every
-import io.mockk.mockk
 import io.mockk.spyk
 import org.junit.After
 import org.junit.Assert.assertFalse
@@ -25,12 +24,12 @@ class InternetConnectivityTest {
     @Test
     fun internetNotAvailable() {
         every { cloudTransfer.socket } throws IOException()
-        assertFalse("", cloudTransfer.isInternetAvailable(mockk()))
+        assertFalse("", cloudTransfer.isInternetAvailable())
     }
 
     @Test
     fun internetDisappearedMidway() {
         every { cloudTransfer.socket } throws InterruptedException()
-        assertFalse("", cloudTransfer.isInternetAvailable(mockk()))
+        assertFalse("", cloudTransfer.isInternetAvailable())
     }
 }
