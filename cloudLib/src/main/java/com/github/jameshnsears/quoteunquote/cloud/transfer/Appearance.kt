@@ -28,6 +28,10 @@ data class Appearance(
     @Keep
     val appearanceTextCenter: Boolean,
 
+    @SerializedName("APPEARANCE_TEXT_RIGHT_SOURCE")
+    @Keep
+    val appearanceTextRightSource: Boolean,
+
     @SerializedName("APPEARANCE_TEXT_SIZE")
     @Keep
     val appearanceTextSize: Int,
