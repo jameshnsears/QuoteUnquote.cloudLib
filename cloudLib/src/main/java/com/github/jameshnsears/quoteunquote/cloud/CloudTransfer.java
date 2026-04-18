@@ -27,7 +27,7 @@ import okhttp3.Response;
 import timber.log.Timber;
 
 public final class CloudTransfer {
-    public static final int TIMEOUT_SECONDS = 30;
+    public static final int TIMEOUT_SECONDS = 60;
     private static final String DNS = "8.8.8.8";
     @Nullable
     private static ExecutorService executorService;
@@ -175,7 +175,7 @@ public final class CloudTransfer {
         });
 
         try {
-            boolean available = future.get(TIMEOUT_SECONDS, TimeUnit.SECONDS);
+            boolean available = future.get(3, TimeUnit.SECONDS);
             Timber.d("isInternetAvailable=%b", available);
             return available;
         } catch (@NonNull ExecutionException | InterruptedException | TimeoutException e) {
