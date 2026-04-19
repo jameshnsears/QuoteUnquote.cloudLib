@@ -94,7 +94,7 @@ public final class CloudTransfer {
         });
 
         try {
-            return future.get(TIMEOUT_SECONDS, TimeUnit.SECONDS);
+            return future.get(1 + TIMEOUT_SECONDS, TimeUnit.SECONDS);
         } catch (@NonNull ExecutionException | InterruptedException | TimeoutException e) {
             Thread.currentThread().interrupt();
             return false;
@@ -144,7 +144,8 @@ public final class CloudTransfer {
                 }
             }
 
-        } catch (@NonNull ExecutionException | InterruptedException | IOException | TimeoutException e) {
+        } catch (@NonNull
+        ExecutionException | InterruptedException | IOException | TimeoutException e) {
             Timber.w(e.toString());
             if (e instanceof InterruptedException) {
                 Thread.currentThread().interrupt();
@@ -166,20 +167,28 @@ public final class CloudTransfer {
     public boolean isInternetAvailable() {
         final Future<Boolean> future = getExecutorService().submit(() -> {
             try (Socket socket = getSocket()) {
-                socket.connect(new InetSocketAddress(DNS, 53), 1500);
+                // Port 53 is DNS; 8.8.8.8 is Google DNS.
+                // This is a reliable way to check actual "internet" access.
+                socket.connect(new InetSocketAddress(DNS, 53), 3000);
                 return true;
-            } catch (Exception e) {
-                Timber.e(e);
+            } catch (IOException e) {
+                // Log as warning, not error, to avoid polluting logs during normal offline state
+                Timber.w("Internet check failed (expected if offline): %s", e.getMessage());
                 return false;
             }
         });
 
         try {
-            boolean available = future.get(3, TimeUnit.SECONDS);
+            // Reduced timeout slightly to match socket timeout + buffer
+            boolean available = future.get(4, TimeUnit.SECONDS);
             Timber.d("isInternetAvailable=%b", available);
             return available;
-        } catch (@NonNull ExecutionException | InterruptedException | TimeoutException e) {
-            Thread.currentThread().interrupt();
+        } catch (InterruptedException e) {
+            Timber.w("Internet check interrupted");
+            Thread.currentThread().interrupt(); // Proper interruption handling
+            return false;
+        } catch (ExecutionException | TimeoutException e) {
+            Timber.w("Internet check timed out or failed to execute");
             return false;
         }
     }
