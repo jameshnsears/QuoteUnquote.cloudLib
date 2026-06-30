@@ -7,11 +7,9 @@ data class TransferRestoreResponse(
     @SerializedName("transfer")
     @Keep
     val transfer: Transfer,
-
     @SerializedName("error")
     @Keep
     val error: String,
-
     @SerializedName("reason")
     @Keep
     val reason: String,

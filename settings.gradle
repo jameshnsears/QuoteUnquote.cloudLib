@@ -1,2 +1,0 @@
-include ':cloudLib'
-rootProject.name = "QuoteUnquote.cloudLib"

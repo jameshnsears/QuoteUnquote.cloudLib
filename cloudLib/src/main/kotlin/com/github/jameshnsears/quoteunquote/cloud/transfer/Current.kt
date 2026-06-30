@@ -3,15 +3,13 @@ package com.github.jameshnsears.quoteunquote.cloud.transfer
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
-data class Favourite(
+data class Current(
     @SerializedName("digest")
     @Keep
     val digest: String,
-
-    @SerializedName("navigation")
+    @SerializedName("widget_id")
     @Keep
-    val navigation: Int,
-
+    val widgetId: Int,
     @SerializedName("db")
     @Keep
     val db: String,

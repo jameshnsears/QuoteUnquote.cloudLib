@@ -6,8 +6,6 @@ import androidx.annotation.Nullable;
 import com.github.jameshnsears.quoteunquote.cloud.transfer.TransferRestoreResponse;
 import com.google.gson.Gson;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -159,7 +157,7 @@ public final class CloudTransfer {
         return receiveResponse;
     }
 
-    @NotNull
+    @NonNull
     public ReceiveResponseFuture getReceiveResponseFuture() {
         return new ReceiveResponseFuture();
     }
@@ -193,7 +191,7 @@ public final class CloudTransfer {
         }
     }
 
-    @NotNull
+    @NonNull
     public Socket getSocket() {
         return new Socket();
     }

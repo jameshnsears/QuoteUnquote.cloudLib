@@ -1,35 +1,35 @@
 package com.github.jameshnsears.quoteunquote.cloud
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 
 class RemoteCodeTest {
     @Test
     fun remoteCode() {
-        assertTrue(
+        assertThat(
             CloudTransferHelper.isRemoteCodeValid(
                 CloudTransferHelper.getLocalCode(),
             ),
+            `is`(true),
         )
 
         val localCode = CloudTransferHelper.getLocalCode()
 
-        assertEquals("", 10, localCode.length.toLong())
+        assertThat("", localCode.length.toLong(), `is`(10L))
 
         // used in QuoteUnquote.cloudLib.functions
-        assertTrue("", CloudTransferHelper.isRemoteCodeValid("10000000d1"))
-        assertTrue("", CloudTransferHelper.isRemoteCodeValid("200000005e"))
-        assertTrue("", CloudTransferHelper.isRemoteCodeValid("30000000e8"))
-        assertTrue("", CloudTransferHelper.isRemoteCodeValid("40000000d4"))
-        assertTrue("", CloudTransferHelper.isRemoteCodeValid("500000008b"))
-        assertTrue("", CloudTransferHelper.isRemoteCodeValid("6000000061"))
+        assertThat("", CloudTransferHelper.isRemoteCodeValid("10000000d1"), `is`(true))
+        assertThat("", CloudTransferHelper.isRemoteCodeValid("200000005e"), `is`(true))
+        assertThat("", CloudTransferHelper.isRemoteCodeValid("30000000e8"), `is`(true))
+        assertThat("", CloudTransferHelper.isRemoteCodeValid("40000000d4"), `is`(true))
+        assertThat("", CloudTransferHelper.isRemoteCodeValid("500000008b"), `is`(true))
+        assertThat("", CloudTransferHelper.isRemoteCodeValid("6000000061"), `is`(true))
 
         // used in QuoteUnquote.cloudLib
-        assertTrue("", CloudTransferHelper.isRemoteCodeValid("700000008c"))
-        assertTrue("", CloudTransferHelper.isRemoteCodeValid("80000000c4"))
+        assertThat("", CloudTransferHelper.isRemoteCodeValid("700000008c"), `is`(true))
+        assertThat("", CloudTransferHelper.isRemoteCodeValid("80000000c4"), `is`(true))
 
-        assertFalse("", CloudTransferHelper.isRemoteCodeValid("0000000000"))
+        assertThat("", CloudTransferHelper.isRemoteCodeValid("0000000000"), `is`(false))
     }
 }

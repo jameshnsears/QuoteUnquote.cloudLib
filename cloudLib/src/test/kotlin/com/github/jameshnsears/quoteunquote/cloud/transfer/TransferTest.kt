@@ -4,15 +4,22 @@ import com.github.jameshnsears.quoteunquote.cloud.CloudTransfer
 import com.github.jameshnsears.quoteunquote.cloud.CloudTransferHelper
 import com.google.gson.Gson
 import io.mockk.spyk
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.nullValue
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.FixMethodOrder
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [36])
 class TransferTest {
     private lateinit var cloudTransfer: CloudTransfer
     private lateinit var gson: Gson
@@ -32,9 +39,10 @@ class TransferTest {
     fun backupSingleWidget() {
         val transferJson = gson.toJson(transfer())
 
-        assertTrue(
+        assertThat(
             "",
             cloudTransfer.backup(transferJson),
+            `is`(true),
         )
 
         // give GCP time to populate Firestore
@@ -53,9 +61,9 @@ class TransferTest {
                 transferRestoreRequestJson,
             )
 
-        assertTrue("", transferRestoreResponse?.transfer?.code == transferCode)
-        assertTrue("", transferRestoreResponse?.error == "")
-        assertTrue("", transferRestoreResponse?.reason == "")
+        assertThat("", transferRestoreResponse?.transfer?.code, equalTo(transferCode))
+        assertThat("", transferRestoreResponse?.error, equalTo(""))
+        assertThat("", transferRestoreResponse?.reason, equalTo(""))
     }
 
     @Test
@@ -70,14 +78,14 @@ class TransferTest {
                 transferRestoreRequestJson,
             )
 
-        assertTrue("", transferRestoreResponse?.transfer?.code == null)
-        assertTrue("", transferRestoreResponse?.transfer?.current == null)
-        assertTrue("", transferRestoreResponse?.transfer?.favourites == null)
-        assertTrue("", transferRestoreResponse?.transfer?.previous == null)
-        assertTrue("", transferRestoreResponse?.transfer?.settings == null)
+        assertThat("", transferRestoreResponse?.transfer?.code, nullValue())
+        assertThat("", transferRestoreResponse?.transfer?.current, nullValue())
+        assertThat("", transferRestoreResponse?.transfer?.favourites, nullValue())
+        assertThat("", transferRestoreResponse?.transfer?.previous, nullValue())
+        assertThat("", transferRestoreResponse?.transfer?.settings, nullValue())
 
-        assertEquals("", "JSON not valid", transferRestoreResponse?.error)
-        assertEquals("", "no JSON for code", transferRestoreResponse?.reason)
+        assertThat("", transferRestoreResponse?.error, equalTo("JSON not valid"))
+        assertThat("", transferRestoreResponse?.reason, equalTo("no JSON for code"))
     }
 
     private fun transfer(): Transfer {
@@ -95,76 +103,79 @@ class TransferTest {
         )
     }
 
-    fun settingsQuotations() = Quotations(
-        true,
-        true,
-        "",
-        false,
-        1,
-        "",
-        false,
-        false,
-        false,
-        0,
-        "",
-        true,
-        false,
-        false,
-        "",
-        "",
-        "",
-        false,
-    )
+    fun settingsQuotations() =
+        Quotations(
+            true,
+            true,
+            "",
+            false,
+            1,
+            "",
+            false,
+            false,
+            false,
+            0,
+            "",
+            true,
+            false,
+            false,
+            "",
+            "",
+            "",
+            false,
+        )
 
     private fun settings(widgetId: Int): Settings {
         val quotations = settingsQuotations()
 
-        val appearance = Appearance(
-            0,
-            "",
-            "",
-            "",
-            false,
-            false,
-            true,
-            0,
-            "",
-            0,
-            "",
-            false,
-            0,
-            "",
-            false,
-            false,
-            "",
-            false,
-            false,
-            false,
-            false,
-            true,
-            false,
-            false,
-            false,
-            0,
-        )
+        val appearance =
+            Appearance(
+                0,
+                "",
+                "",
+                "",
+                false,
+                false,
+                true,
+                0,
+                "",
+                0,
+                "",
+                false,
+                0,
+                "",
+                false,
+                false,
+                "",
+                false,
+                false,
+                false,
+                false,
+                true,
+                false,
+                false,
+                false,
+                0,
+            )
 
-        val schedule = Schedule(
-            false,
-            true,
-            false,
-            true,
-            false,
-            false,
-            false,
-            0,
-            0,
-            false,
-            0,
-            23,
-            1,
-            false,
-            true,
-        )
+        val schedule =
+            Schedule(
+                false,
+                true,
+                false,
+                true,
+                false,
+                false,
+                false,
+                0,
+                0,
+                false,
+                0,
+                23,
+                1,
+                false,
+                true,
+            )
 
         return Settings(
             quotations,

@@ -6,8 +6,13 @@ import org.junit.After
 import org.junit.Assert.assertFalse
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import java.io.IOException
 
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [36])
 class InternetConnectivityTest {
     private lateinit var cloudTransfer: CloudTransfer
 
