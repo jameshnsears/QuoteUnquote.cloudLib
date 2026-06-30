@@ -1,0 +1,241 @@
+import java.util.Properties
+
+plugins {
+    id("com.android.library")
+    id("io.gitlab.arturbosch.detekt")
+    id("jacoco")
+}
+
+// --- Detekt ---
+detekt {
+    debug = true
+    ignoreFailures = false
+    buildUponDefaultConfig = true
+    config.setFrom(files("${project.projectDir}/../detekt.yml"))
+    baseline = file("${project.projectDir}/detekt-baseline.xml")
+    source.setFrom(files("src/main/java", "src/main/kotlin"))
+    parallel = true
+}
+
+// Manual ktlint tasks
+val ktlintConfiguration = configurations.create("ktlint")
+dependencies {
+    ktlintConfiguration("com.pinterest:ktlint:0.50.0") {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
+        }
+    }
+}
+
+tasks.register<JavaExec>("ktlint") {
+    group = "verification"
+    description = "Check Kotlin code style."
+    classpath = ktlintConfiguration
+    mainClass.set("com.pinterest.ktlint.Main")
+    jvmArgs("--add-opens", "java.base/java.lang=ALL-UNNAMED")
+    args(
+        "--color",
+        "src/**/*.kt",
+        "**.kts",
+        "!**/build/**",
+    )
+}
+
+tasks.register<JavaExec>("ktlintFormat") {
+    group = "formatting"
+    description = "Fix Kotlin code style deviations."
+    classpath = ktlintConfiguration
+    mainClass.set("com.pinterest.ktlint.Main")
+    jvmArgs("--add-opens", "java.base/java.lang=ALL-UNNAMED")
+    args(
+        "-F",
+        "src/**/*.kt",
+        "**.kts",
+        "!**/build/**",
+    )
+}
+
+// --- Jacoco ---
+jacoco {
+    toolVersion = "0.8.15"
+}
+
+project.afterEvaluate {
+    val android = extensions.getByType<com.android.build.api.dsl.LibraryExtension>()
+    val buildTypes = android.buildTypes.map { it.name }
+    val productFlavors = android.productFlavors.map { it.name }.toMutableList()
+
+    if (productFlavors.isEmpty()) productFlavors.add("")
+
+    productFlavors.forEach { productFlavorName ->
+        buildTypes.forEach { buildTypeName ->
+            val variantName = if (productFlavorName.isNotEmpty()) {
+                "${productFlavorName}${buildTypeName.replaceFirstChar { it.uppercase() }}"
+            } else {
+                buildTypeName
+            }
+            val capitalizedVariantName = variantName.replaceFirstChar { it.uppercase() }
+            val testTaskName = "test${capitalizedVariantName}UnitTest"
+
+            val fileExclusions = listOf(
+                "**/R.class",
+                "**/R$*.class",
+                "**/BuildConfig.*",
+                "**/Manifest*.*",
+                "**/*_Impl*.*",
+                "**/*Binding.*",
+                "**/*Double.*",
+                "**/*Test.*",
+                "**/*Test$*.class",
+                "**/databinding/**",
+                "**/di/**",
+            )
+
+            tasks.register<JacocoReport>("test${capitalizedVariantName}Coverage") {
+                group = "quoteunquote"
+                description = "Generate JaCoCo coverage report for the '$variantName' variant."
+
+                dependsOn(testTaskName)
+
+                val buildDir = layout.buildDirectory.get().asFile
+                classDirectories.setFrom(
+                    fileTree("$buildDir/intermediates") {
+                        include("**/$variantName/**/classes/**/*.class")
+                        exclude(fileExclusions)
+                    },
+                )
+                sourceDirectories.setFrom(
+                    files(
+                        "$projectDir/src/main/java",
+                        "$projectDir/src/main/kotlin",
+                    ),
+                )
+                executionData.setFrom(
+                    fileTree(buildDir) {
+                        include(
+                            "jacoco/$testTaskName.exec",
+                            "outputs/unit_test_code_coverage/${variantName}UnitTest/$testTaskName.exec",
+                        )
+                    },
+                )
+
+                reports {
+                    xml.required.set(true)
+                    xml.outputLocation.set(file("$buildDir/reports/jacoco/$variantName/$variantName.xml"))
+                    html.required.set(true)
+                    html.outputLocation.set(file("$buildDir/reports/jacoco/$variantName/html"))
+                }
+            }
+        }
+    }
+}
+
+val localPropertiesFile = file(project(":cloudLib").projectDir.path + "/local.properties")
+val localProperties = Properties()
+
+if (!localPropertiesFile.exists()) {
+    localProperties.setProperty("REMOTE_DEVICE_ENDPOINT_PRODUCTION", "")
+    localProperties.setProperty("REMOTE_DEVICE_ENDPOINT_DEVELOPMENT", "")
+    localPropertiesFile.bufferedWriter().use<java.io.BufferedWriter, Unit> { writer ->
+        localProperties.store(writer, "empty, as creating the file is done manually via gpg")
+    }
+}
+
+android {
+    namespace = "com.github.jameshnsears.quoteunquote.cloud"
+    compileSdk = 37
+
+    defaultConfig {
+        minSdk = 30
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    buildTypes {
+        var remoteDeviceEndpointProd = System.getenv("REMOTE_DEVICE_ENDPOINT_PRODUCTION")
+        if (remoteDeviceEndpointProd == null) {
+            val properties = Properties()
+            if (project.file("local.properties").exists()) {
+                project.file("local.properties").inputStream().use { properties.load(it) }
+            }
+            remoteDeviceEndpointProd =
+                properties.getProperty("REMOTE_DEVICE_ENDPOINT_PRODUCTION") ?: ""
+        }
+
+        var remoteDeviceEndpointDev = System.getenv("REMOTE_DEVICE_ENDPOINT_DEVELOPMENT")
+        if (remoteDeviceEndpointDev == null) {
+            val properties = Properties()
+            if (project.file("local.properties").exists()) {
+                project.file("local.properties").inputStream().use { properties.load(it) }
+            }
+            remoteDeviceEndpointDev =
+                properties.getProperty("REMOTE_DEVICE_ENDPOINT_DEVELOPMENT") ?: ""
+        }
+
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
+            buildConfigField("String", "REMOTE_DEVICE_ENDPOINT", "\"$remoteDeviceEndpointProd\"")
+        }
+
+        getByName("debug") {
+            enableUnitTestCoverage = true
+            buildConfigField("String", "REMOTE_DEVICE_ENDPOINT", "\"$remoteDeviceEndpointDev\"")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    flavorDimensions += "Version"
+    productFlavors {
+        create("fdroid") { dimension = "Version" }
+        create("googleplay") { dimension = "Version" }
+        create("espresso") { dimension = "Version" }
+        create("uiautomator") { dimension = "Version" }
+    }
+
+    sourceSets {
+        getByName("fdroid") { java.directories.add("src/main/java") }
+        getByName("googleplay") { java.directories.add("src/main/java") }
+        getByName("espresso") { java.directories.add("src/main/java") }
+        getByName("uiautomator") { java.directories.add("src/main/java") }
+    }
+
+    testOptions {
+        unitTests { isIncludeAndroidResources = true }
+    }
+
+    lint {
+        abortOnError = true
+        checkAllWarnings = true
+        htmlReport = true
+        warningsAsErrors = false
+        xmlReport = false
+        targetSdk = 36
+    }
+}
+
+dependencies {
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8")
+    implementation("androidx.annotation:annotation:1.10.0")
+    implementation("androidx.core:core-ktx:1.19.0")
+    implementation("com.google.code.gson:gson:2.14.0")
+    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation("commons-codec:commons-codec:1.22.0")
+    implementation("com.squareup.okhttp3:okhttp:5.4.0")
+    implementation("org.apache.commons:commons-lang3:3.20.0")
+    implementation("org.conscrypt:conscrypt-android:2.5.3")
+    testImplementation("androidx.test.ext:junit:1.3.0")
+    testImplementation("androidx.test:runner:1.7.0")
+    testImplementation("io.mockk:mockk:1.14.11")
+    testImplementation("junit:junit:4.13.2")
+}
