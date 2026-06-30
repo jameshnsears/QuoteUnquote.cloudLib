@@ -10,9 +10,14 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.FixMethodOrder
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [36])
 class TransferTest {
     private lateinit var cloudTransfer: CloudTransfer
     private lateinit var gson: Gson
@@ -95,76 +100,79 @@ class TransferTest {
         )
     }
 
-    fun settingsQuotations() = Quotations(
-        true,
-        true,
-        "",
-        false,
-        1,
-        "",
-        false,
-        false,
-        false,
-        0,
-        "",
-        true,
-        false,
-        false,
-        "",
-        "",
-        "",
-        false,
-    )
+    fun settingsQuotations() =
+        Quotations(
+            true,
+            true,
+            "",
+            false,
+            1,
+            "",
+            false,
+            false,
+            false,
+            0,
+            "",
+            true,
+            false,
+            false,
+            "",
+            "",
+            "",
+            false,
+        )
 
     private fun settings(widgetId: Int): Settings {
         val quotations = settingsQuotations()
 
-        val appearance = Appearance(
-            0,
-            "",
-            "",
-            "",
-            false,
-            false,
-            true,
-            0,
-            "",
-            0,
-            "",
-            false,
-            0,
-            "",
-            false,
-            false,
-            "",
-            false,
-            false,
-            false,
-            false,
-            true,
-            false,
-            false,
-            false,
-            0,
-        )
+        val appearance =
+            Appearance(
+                0,
+                "",
+                "",
+                "",
+                false,
+                false,
+                true,
+                0,
+                "",
+                0,
+                "",
+                false,
+                0,
+                "",
+                false,
+                false,
+                "",
+                false,
+                false,
+                false,
+                false,
+                true,
+                false,
+                false,
+                false,
+                0,
+            )
 
-        val schedule = Schedule(
-            false,
-            true,
-            false,
-            true,
-            false,
-            false,
-            false,
-            0,
-            0,
-            false,
-            0,
-            23,
-            1,
-            false,
-            true,
-        )
+        val schedule =
+            Schedule(
+                false,
+                true,
+                false,
+                true,
+                false,
+                false,
+                false,
+                0,
+                0,
+                false,
+                0,
+                23,
+                1,
+                false,
+                true,
+            )
 
         return Settings(
             quotations,
