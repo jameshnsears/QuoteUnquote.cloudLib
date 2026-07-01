@@ -204,10 +204,36 @@ android {
     }
 
     sourceSets {
-        getByName("fdroid") { java.directories.add("src/main/java") }
-        getByName("googleplay") { java.directories.add("src/main/java") }
-        getByName("espresso") { java.directories.add("src/main/java") }
-        getByName("uiautomator") { java.directories.add("src/main/java") }
+        getByName("main") {
+            java.directories.add("src/main/java")
+            java.directories.add("src/main/kotlin")
+            kotlin.directories.add("src/main/java")
+            kotlin.directories.add("src/main/kotlin")
+        }
+        getByName("fdroid") {
+            java.directories.add("src/main/java")
+            java.directories.add("src/main/kotlin")
+            kotlin.directories.add("src/main/java")
+            kotlin.directories.add("src/main/kotlin")
+        }
+        getByName("googleplay") {
+            java.directories.add("src/main/java")
+            java.directories.add("src/main/kotlin")
+            kotlin.directories.add("src/main/java")
+            kotlin.directories.add("src/main/kotlin")
+        }
+        getByName("espresso") {
+            java.directories.add("src/main/java")
+            java.directories.add("src/main/kotlin")
+            kotlin.directories.add("src/main/java")
+            kotlin.directories.add("src/main/kotlin")
+        }
+        getByName("uiautomator") {
+            java.directories.add("src/main/java")
+            java.directories.add("src/main/kotlin")
+            kotlin.directories.add("src/main/java")
+            kotlin.directories.add("src/main/kotlin")
+        }
     }
 
     testOptions {
