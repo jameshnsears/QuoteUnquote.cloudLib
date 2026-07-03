@@ -20,7 +20,7 @@ detekt {
 // Manual ktlint tasks
 val ktlintConfiguration = configurations.create("ktlint")
 dependencies {
-    ktlintConfiguration("com.pinterest.ktlint:ktlint-cli:1.5.0") {
+    ktlintConfiguration("com.pinterest.ktlint:ktlint-cli:1.8.0") {
         attributes {
             attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
         }
