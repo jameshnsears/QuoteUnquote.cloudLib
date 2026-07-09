@@ -291,7 +291,7 @@ dependencies {
     implementation("commons-codec:commons-codec:1.22.0")
     implementation("com.squareup.okhttp3:okhttp:5.4.0")
     implementation("org.apache.commons:commons-lang3:3.20.0")
-    implementation("org.conscrypt:conscrypt-android:2.5.3")
+    implementation("org.conscrypt:conscrypt-android:2.6.0")
     testImplementation("androidx.test.ext:junit:1.3.0")
     testImplementation("androidx.test:runner:1.7.0")
     testImplementation("io.mockk:mockk:1.14.11")
