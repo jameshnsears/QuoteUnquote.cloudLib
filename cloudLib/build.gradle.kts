@@ -297,5 +297,5 @@ dependencies {
     testImplementation("io.mockk:mockk:1.14.11")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.robolectric:robolectric:4.16.1")
-    testImplementation("org.conscrypt:conscrypt-openjdk-uber:2.5.2")
+    testImplementation("org.conscrypt:conscrypt-openjdk-uber:2.6.0")
 }
