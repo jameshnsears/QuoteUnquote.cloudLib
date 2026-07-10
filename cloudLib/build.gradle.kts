@@ -285,7 +285,7 @@ android {
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8")
     implementation("androidx.annotation:annotation:1.10.0")
-    implementation("androidx.core:core-ktx:1.5.0") //   # stable, for Liar API: Fatal Exception: java.lang.NoSuchMethodError: No virtual method getRoundedCorner(I)Landroid/view/RoundedCorner; in class Landroid/view/Display
+    implementation("androidx.core:core-ktx:1.19.0") //   # stable, for Liar API: Fatal Exception: java.lang.NoSuchMethodError: No virtual method getRoundedCorner(I)Landroid/view/RoundedCorner; in class Landroid/view/Display
     implementation("com.google.code.gson:gson:2.14.0")
     implementation("com.jakewharton.timber:timber:5.0.1")
     implementation("commons-codec:commons-codec:1.22.0")
