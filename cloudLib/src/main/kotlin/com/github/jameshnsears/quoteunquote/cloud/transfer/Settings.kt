@@ -6,16 +6,16 @@ import com.google.gson.annotations.SerializedName
 data class Settings(
     @SerializedName("quotations")
     @Keep
-    val quotations: Quotations,
+    val quotations: Quotations?,
     @SerializedName("appearance")
     @Keep
-    val appearance: Appearance,
+    val appearance: Appearance?,
     @SerializedName("schedule")
     @Keep
-    val schedule: Schedule,
+    val schedule: Schedule?,
     @SerializedName("sync")
     @Keep
-    val sync: Sync,
+    val sync: Sync?,
     @SerializedName("widget_id")
     @Keep
     val widgetId: Int,
