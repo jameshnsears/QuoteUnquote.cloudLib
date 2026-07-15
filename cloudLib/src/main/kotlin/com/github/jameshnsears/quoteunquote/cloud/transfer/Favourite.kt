@@ -12,5 +12,5 @@ data class Favourite(
     val navigation: Int,
     @SerializedName("db")
     @Keep
-    val db: String? = "internal",
+    val db: String,
 )

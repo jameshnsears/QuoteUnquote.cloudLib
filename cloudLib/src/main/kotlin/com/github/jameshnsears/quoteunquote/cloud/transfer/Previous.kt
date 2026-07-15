@@ -18,5 +18,5 @@ data class Previous(
     val widgetId: Int,
     @SerializedName("db")
     @Keep
-    val db: String? = "internal",
+    val db: String,
 )
