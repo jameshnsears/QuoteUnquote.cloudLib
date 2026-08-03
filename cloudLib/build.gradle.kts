@@ -288,7 +288,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.5.0") //   # stable, for Liar API: Fatal Exception: java.lang.NoSuchMethodError: No virtual method getRoundedCorner(I)Landroid/view/RoundedCorner; in class Landroid/view/Display
     implementation("com.google.code.gson:gson:2.14.0")
     implementation("com.jakewharton.timber:timber:5.0.1")
-    implementation("commons-codec:commons-codec:1.22.0")
+    implementation("commons-codec:commons-codec:1.22.1")
     implementation("com.squareup.okhttp3:okhttp:5.4.0")
     implementation("org.apache.commons:commons-lang3:3.20.0")
     implementation("org.conscrypt:conscrypt-android:2.6.1")
